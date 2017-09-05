@@ -1,0 +1,31 @@
+{
+  "name": "finances-react",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "material-ui": "^0.19.1",
+    "moment": "^2.18.1",
+    "numeral": "^2.0.6",
+    "query-string": "^5.0.0",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.11",
+    "rebass": "^1.0.4",
+    "recompose": "^0.25.0",
+    "render-if": "^0.1.1",
+    "styled-components": "^2.1.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "flow": "flow"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.52.0"
+  }
+}
