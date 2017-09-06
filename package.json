@@ -21,11 +21,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "deploy": "firebase deploy",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "flow": "flow"
   },
   "devDependencies": {
+    "firebase-tools": "^3.10.0",
     "flow-bin": "^0.52.0"
   }
 }
