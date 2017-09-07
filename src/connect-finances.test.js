@@ -1,4 +1,4 @@
-import {_parseTransaction, _parseBudget} from './connect-finances'
+import {_parseTransaction, _parseBudget} from './sheets'
 
 
 test('[_parseTransaction] constructs object from sheet array', () => {
