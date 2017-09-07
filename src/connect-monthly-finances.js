@@ -38,7 +38,6 @@ export const _getMonthlyFinances = (
         expenses: get(monthlyExpenses, month),
         income: get(monthlyIncome, month),
         budget: get(budget, month),
-        progress: getBudgetProgress(get(monthlyExpenses), get(budget, month)),
     }))
 }
 

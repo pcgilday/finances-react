@@ -1,4 +1,4 @@
-import {_getMonthlyFinances} from './sheets'
+import {_getMonthlyFinances} from './connect-monthly-finances'
 
 
 test('[_getMonthlyFinances] groups expenses and income by month', () => {
@@ -54,6 +54,7 @@ test('[_getMonthlyFinances] groups expenses and income by month', () => {
     expect(monthlyFinances).toEqual([
         {
             month: 6,
+            budget: undefined,
             expenses: [{
                 date: '2017-07-08',
                 name: 'Rent',
@@ -71,6 +72,7 @@ test('[_getMonthlyFinances] groups expenses and income by month', () => {
         },
         {
             month: 7,
+            budget: undefined,
             expenses: [{
                 date: '2017-08-08',
                 name: 'Giant',
@@ -88,6 +90,7 @@ test('[_getMonthlyFinances] groups expenses and income by month', () => {
         },
         {
             month: 8,
+            budget: undefined,
             expenses: [{
                 date: '2017-09-08',
                 name: 'Amazon',
