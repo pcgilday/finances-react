@@ -4,7 +4,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 
-export const fontSizes = ['10px', '12px', '14px', '16px', '24px', '40px']
+export const fontSizes = ['.75rem', '.875rem', '1rem', '1.25rem', '1.5rem', '2rem']
 export const spacing = ['0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem']
 export const spacingReadingCol = '40rem'
 
@@ -17,6 +17,10 @@ export const colors = {
     white: '#FFFFFF',
 }
 
+export const serifFont = 'Georgia, serif'
+//export const sansSerifFont = 'Arial, Helvetica, sans-serif'
+export const sansSerifFont = '-apple-system, BlinkMacSystemFont, sans-serif'
+
 
 type HeadingProps = {|
     size: 1 | 2 | 3 | 4 | 5 | 6,
@@ -24,13 +28,18 @@ type HeadingProps = {|
     children: any,
 |}
 
+const H1 = styled.h1`
+    font-family: ${sansSerifFont};
+    font-size: ${fontSizes[5]}
+`
+
 // Doesn't evan properly, as long as children is passed
 // this is fine.
 /* eslint-disable jsx-a11y/heading-has-content */
 export const Heading = ({size, ...props}: HeadingProps) => {
     switch(size) {
         case 1:
-            return <h1 {...props} />
+            return <H1 {...props} />
         case 2:
             return <h2 {...props} />
         case 3:
@@ -72,19 +81,31 @@ export const TableCell = styled.td`
 `
 
 export const Text = styled.span`
+    font-family: ${sansSerifFont};
     font-size: ${(props: any) => fontSizes[get(props, 'size', 3)]};
-    font-weight: ${(props: any) => props.bold ? 'bold' : 'normal'}
+    font-weight: ${(props: any) => props.bold ? 'bold' : 'normal'};
+    font-style: ${props => props.italic ? 'italic' : 'none'};
 `
 
 export const Flex = styled.div`
     display: flex;
     align-items: ${props => props.alignItems ? props.alignItems : 'stretch'};
     justify-content: ${props => props.justifyContent ? props.justifyContent : 'flex-start'};
+    padding: ${props => props.spacing ? props.spacing : 0};
+    flex-wrap: ${props => props.wrap ? 'wrap' : 'nowrap'};
 `
 
 export const ContentPage = styled.div`
     max-width: ${spacingReadingCol};
     padding-left: ${spacing[1]};
     padding-right: ${spacing[1]};
+`
+
+export const Progress = styled.progress`
+    display: 'block';
+    height: px(idx('space.1', props.theme));
+    borderRadius: ;
+    overflow: 'hidden';
+    appearance: 'none';
 `
 

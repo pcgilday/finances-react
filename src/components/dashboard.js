@@ -6,7 +6,7 @@ import {
 import React from 'react'
 import {getBudgetProgress} from '../transforms'
 import {MonthlySummary} from './monthly-summary'
-import {ContentPage} from './base'
+import {spacing} from './base'
 import type {MonthlyFinances} from '../flowtypes'
 
 type DashboardProps = {|
@@ -14,7 +14,7 @@ type DashboardProps = {|
 |}
 
 export const Dashboard = ({monthlyFinances}: DashboardProps) => (
-    <ContentPage>
+    <div style={{paddingLeft: spacing[1], paddingRight: spacing[1]}} >
         {map(monthlyFinances, ({month, expenses, income, budget}) => (
             <MonthlySummary
                 key={month}
@@ -24,6 +24,6 @@ export const Dashboard = ({monthlyFinances}: DashboardProps) => (
                 budgetProgressItems={getBudgetProgress(expenses, budget)}
             />
         ))}
-    </ContentPage>
+    </div>
 )
 

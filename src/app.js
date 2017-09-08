@@ -5,9 +5,7 @@ import {
 import React from 'react'
 import {compose, withProps} from 'recompose'
 import styled from 'styled-components'
-
 import {Link, Route} from 'react-router-dom'
-
 import {connectMonthlyFinances} from './connect-monthly-finances'
 
 import {
@@ -18,6 +16,7 @@ import {
     Flex,
     colors,
     fontSizes,
+    sansSerifFont,
 } from './components/base'
 
 
@@ -52,9 +51,13 @@ const StyledLink = styled(Link)`
     background-color: light-gray;
     color: ${colors.white};
     font-weight: 'bold';
+    font-family: ${sansSerifFont};
     font-size: ${fontSizes[3]};
     text-decoration: none;
     padding: 1rem;
+    @media (max-width: 400px) {
+        font-size: ${fontSizes[2]};
+    }
 `
 
 const Nav = styled.nav`

@@ -5,6 +5,7 @@ import {BrowserRouter} from 'react-router-dom'
 import {App} from './app'
 import {GoogleAuthProvider} from './google-auth'
 import registerServiceWorker from './registerServiceWorker'
+import './index.css'
 
 
 const Login = ({signIn}) => (

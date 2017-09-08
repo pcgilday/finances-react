@@ -15,22 +15,26 @@ export const ProgressSummary = (
     {name: string, planned: number, actual: number},
 ) => (
     <div style={{paddingBottom: spacing[1]}}>
-        <Flex justifyContent='space-between' spacing={`${spacing[2]} 0`}>
-            <Text bold >
+        <Flex justifyContent='space-between' spacing={`0 0 ${spacing[0]} 0`}>
+            <Text size={3} bold >
                 {name}
             </Text>
+
             <div>
-                <Text bold >
+                <Text size={2} bold >
                     {formatCurrency(actual)}
                 </Text>
-                <Text>
+                <Text size={1} >
                     {' of '}
                 </Text>
-                <Text bold >
+                <Text size={2} bold >
                     {formatCurrency(planned)}
                 </Text>
             </div>
         </Flex>
-        <Progress value={actual / planned} color={actual < planned ? colors.green : colors.red} />
+        <Progress
+            height={'25px'}
+            value={actual / planned}
+            color={actual < planned ? colors.green : colors.red} />
     </div>
 )
