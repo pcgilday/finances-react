@@ -1,8 +1,8 @@
 // @flow
 import React from 'react'
+import styled from 'styled-components'
 import {formatCurrency} from '../formatting'
 import {
-    Flex,
     Text,
     spacing,
 } from './base'
@@ -12,16 +12,41 @@ type NetIncomeProps = {|
     incomeTotal: number,
 |}
 
+const StyledContainer = styled.div`
+    display: flex;
+    padding-bottom: ${spacing[2]};
+    @media (max-width: 600px) {
+        flex-direction: column;
+    }
+`
+
 export const NetIncome = ({expenseTotal, incomeTotal}: NetIncomeProps) => (
-    <Flex style={{paddingBottom: spacing[2]}}>
-        <Text bold style={{paddingRight: spacing[2]}} >
-            {`Net: ${formatCurrency(incomeTotal - expenseTotal)}`}
-        </Text>
-        <Text bold style={{paddingRight: spacing[2]}} >
-            {`Income: ${formatCurrency(incomeTotal)}`}
-        </Text>
-        <Text bold style={{paddingRight: spacing[2]}} >
-            {`Expenses: ${formatCurrency(expenseTotal)}`}
-        </Text>
-    </Flex>
+    <StyledContainer>
+        <div>
+            <Text size={3} style={{paddingRight: spacing[0]}} bold >
+                {'Income:'}
+            </Text>
+            <Text size={3} style={{paddingRight: spacing[2]}} >
+                {formatCurrency(incomeTotal)}
+            </Text>
+        </div>
+
+        <div>
+            <Text size={3} style={{paddingRight: spacing[0]}} bold >
+                {'Expenses:'}
+            </Text>
+            <Text size={3} style={{paddingRight: spacing[2]}} >
+                {formatCurrency(expenseTotal)}
+            </Text>
+        </div>
+
+        <div>
+            <Text size={3} style={{paddingRight: spacing[0]}} bold >
+                {'Net:'}
+            </Text>
+            <Text size={3} style={{paddingRight: spacing[2]}} >
+                {formatCurrency(incomeTotal - expenseTotal)}
+            </Text>
+        </div>
+    </StyledContainer>
 )
