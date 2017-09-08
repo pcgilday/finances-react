@@ -17,6 +17,7 @@ import {
     colors,
     fontSizes,
     sansSerifFont,
+    spacing,
 } from './components/base'
 
 
@@ -64,6 +65,11 @@ const Nav = styled.nav`
     background-color: ${colors.green};
 `
 
+const StyledApp = styled.div`
+    margin-left: ${spacing[1]};
+    margin-right: ${spacing[1]};
+`
+
 export const App = ({expenses}) => (
     <div>
         <Nav>
@@ -73,11 +79,11 @@ export const App = ({expenses}) => (
                 <StyledLink to='/income'>{'Income'}</StyledLink>
             </Flex>
         </Nav>
-        <div>
+        <StyledApp>
             <Route path='/dashboard' component={DashboardContainer} />
             <Route path='/expenses' component={ExpensesContainer} />
             <Route path='/income' component={IncomeContainer} />
-        </div>
+        </StyledApp>
     </div>
 )
 

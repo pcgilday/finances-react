@@ -12,17 +12,18 @@ type NetIncomeProps = {|
     incomeTotal: number,
 |}
 
-const StyledContainer = styled.div`
+const StyledNetIncome = styled.div`
     display: flex;
-    padding-bottom: ${spacing[2]};
+    padding-bottom: ${spacing[1]};
     @media (max-width: 600px) {
+        align-items: space-between;
         flex-direction: column;
     }
 `
 
 export const NetIncome = ({expenseTotal, incomeTotal}: NetIncomeProps) => (
-    <StyledContainer>
-        <div>
+    <StyledNetIncome>
+        <div style={{paddingBottom: spacing[0]}}>
             <Text size={3} style={{paddingRight: spacing[0]}} bold >
                 {'Income:'}
             </Text>
@@ -31,7 +32,7 @@ export const NetIncome = ({expenseTotal, incomeTotal}: NetIncomeProps) => (
             </Text>
         </div>
 
-        <div>
+        <div style={{paddingBottom: spacing[0]}}>
             <Text size={3} style={{paddingRight: spacing[0]}} bold >
                 {'Expenses:'}
             </Text>
@@ -40,7 +41,7 @@ export const NetIncome = ({expenseTotal, incomeTotal}: NetIncomeProps) => (
             </Text>
         </div>
 
-        <div>
+        <div style={{paddingBottom: spacing[0]}}>
             <Text size={3} style={{paddingRight: spacing[0]}} bold >
                 {'Net:'}
             </Text>
@@ -48,5 +49,5 @@ export const NetIncome = ({expenseTotal, incomeTotal}: NetIncomeProps) => (
                 {formatCurrency(incomeTotal - expenseTotal)}
             </Text>
         </div>
-    </StyledContainer>
+    </StyledNetIncome>
 )

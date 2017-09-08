@@ -4,6 +4,7 @@ import React from 'react'
 import moment from 'moment'
 import {
     Heading,
+    spacing,
 } from './base'
 import type {BudgetProgressItem} from '../flowtypes'
 import {ProgressSummary} from './progress-summary'
@@ -25,7 +26,7 @@ export const MonthlySummary = ({
     net,
     budgetProgressItems,
 }: MonthlySummaryProps) => (
-    <div>
+    <div style={{marginBottom: spacing[3]}} >
         <Heading size={1} >
             {moment().month(month).format('MMMM')}
         </Heading>
@@ -36,6 +37,7 @@ export const MonthlySummary = ({
                     key={category}
                     name={category}
                     planned={amountPlanned}
+                    link={`/expenses?category=${category}`}
                     actual={amountSpent} />
             ))}
         </div>
