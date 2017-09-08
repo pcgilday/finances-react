@@ -8,11 +8,12 @@ export const fontSizes = ['.75rem', '.875rem', '1rem', '1.25rem', '1.5rem', '2re
 export const spacing = ['0.5rem', '1rem', '2rem', '4rem', '8rem', '16rem']
 export const spacingReadingCol = '40rem'
 
-// http://clrs.cc/
 export const colors = {
+    black: '#311311',
+    blue: '#0074D',
     gray: '#AAAAAA',
     green: '#2ECC40',
-    blue: '#0074D',
+    lightGray: '#E2E2E2',
     red: '#FF4136',
     white: '#FFFFFF',
 }

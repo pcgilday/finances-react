@@ -3,6 +3,7 @@ import {
     map,
 } from 'lodash'
 import React from 'react'
+import styled from 'styled-components'
 import moment from 'moment'
 import type {Transaction} from '../flowtypes'
 import {formatCurrency} from '../formatting'
@@ -20,8 +21,12 @@ type Props  = {|
     transactions: Array<Transaction>,
 |}
 
+const StyledTable = styled(Table)`
+    max-width: 1000px;
+`
+
 export const TransactionsTable = ({transactions}: Props) => (
-    <Table>
+    <StyledTable >
         <TableHeader>
             <TableRow>
                 <TableHeaderCell>
@@ -59,6 +64,6 @@ export const TransactionsTable = ({transactions}: Props) => (
                 </TableRow>
             ))}
         </TableBody>
-    </Table>
+    </StyledTable>
 )
 
