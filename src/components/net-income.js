@@ -4,50 +4,49 @@ import styled from 'styled-components'
 import {formatCurrency} from '../formatting'
 import {
     Text,
-    spacing,
-} from './base'
+    Flex,
+} from 'rebass'
 
-type NetIncomeProps = {|
-    expenseTotal: number,
-    incomeTotal: number,
-|}
 
-const StyledNetIncome = styled.div`
-    display: flex;
-    padding-bottom: ${spacing[1]};
+const Wrapper = styled(Flex)`
     @media (max-width: 600px) {
         align-items: space-between;
         flex-direction: column;
     }
 `
 
+type NetIncomeProps = {|
+    expenseTotal: number,
+    incomeTotal: number,
+|}
+
 export const NetIncome = ({expenseTotal, incomeTotal}: NetIncomeProps) => (
-    <StyledNetIncome>
-        <div style={{paddingBottom: spacing[0]}}>
-            <Text size={3} style={{paddingRight: spacing[0]}} bold >
+    <Wrapper pb={1}>
+        <Flex pr={2} pb={2}>
+            <Text fontSize={2} pr={1} bold >
                 {'Income:'}
             </Text>
-            <Text size={3} style={{paddingRight: spacing[2]}} >
+            <Text fontSize={2}>
                 {formatCurrency(incomeTotal)}
             </Text>
-        </div>
+        </Flex>
 
-        <div style={{paddingBottom: spacing[0]}}>
-            <Text size={3} style={{paddingRight: spacing[0]}} bold >
+        <Flex pr={2} pb={2}>
+            <Text fontSize={2} pr={1} bold >
                 {'Expenses:'}
             </Text>
-            <Text size={3} style={{paddingRight: spacing[2]}} >
+            <Text fontSize={2} >
                 {formatCurrency(expenseTotal)}
             </Text>
-        </div>
+        </Flex>
 
-        <div style={{paddingBottom: spacing[0]}}>
-            <Text size={3} style={{paddingRight: spacing[0]}} bold >
+        <Flex pr={2} pb={2}>
+            <Text fontSize={2} pr={1} bold >
                 {'Net:'}
             </Text>
-            <Text size={3} style={{paddingRight: spacing[2]}} >
+            <Text fontSize={2} color={incomeTotal - expenseTotal < 0 ? 'red' : 'green'}>
                 {formatCurrency(incomeTotal - expenseTotal)}
             </Text>
-        </div>
-    </StyledNetIncome>
+        </Flex>
+    </Wrapper>
 )

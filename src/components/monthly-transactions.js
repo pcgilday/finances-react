@@ -6,7 +6,7 @@ import moment from 'moment'
 import type {Transaction} from '../flowtypes'
 import {NetIncome} from './net-income'
 import {TransactionsTable} from './transactions-table'
-import {Heading} from './base'
+import {Box, Heading} from 'rebass'
 import React from 'react'
 
 type Props  = {|
@@ -19,15 +19,17 @@ type Props  = {|
 |}
 
 export const MonthlyTransactions = ({monthlyTransactions}: Props) => (
-    <div>
+    <Box pt={3} px={[0, 1, 2, 3]}>
         {map(monthlyTransactions, ({transactions, month, expenseTotal, incomeTotal}) => (
-            <div key={month}>
-                <Heading size={1}>
+            <Box pb={3} key={month}>
+                <Heading py={3}>
                     {moment().month(month).format('MMMM')}
                 </Heading>
-                <NetIncome expenseTotal={expenseTotal} incomeTotal={incomeTotal} />
+                <Box pb={3}>
+                    <NetIncome expenseTotal={expenseTotal} incomeTotal={incomeTotal} />
+                </Box>
                 <TransactionsTable transactions={transactions} />
-            </div>
+            </Box>
         ))}
-    </div>
+    </Box>
 )

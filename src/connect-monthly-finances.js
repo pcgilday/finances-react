@@ -17,7 +17,7 @@ import type {
     Month,
     MonthlyFinances,
 } from './flowtypes'
-import {filterTransactions, getBudgetProgress} from './transforms'
+import {filterTransactions} from './transforms'
 import {connectFinances} from './connect-finances'
 
 
