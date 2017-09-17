@@ -4,8 +4,8 @@ import React from 'react'
 import moment from 'moment'
 import {
     Heading,
-    spacing,
-} from './base'
+    Box,
+} from 'rebass'
 import type {BudgetProgressItem} from '../flowtypes'
 import {ProgressSummary} from './progress-summary'
 import {NetIncome} from './net-income'
@@ -26,12 +26,12 @@ export const MonthlySummary = ({
     net,
     budgetProgressItems,
 }: MonthlySummaryProps) => (
-    <div style={{marginBottom: spacing[3]}} >
-        <Heading size={1} >
+    <div>
+        <Heading py={3} >
             {moment().month(month).format('MMMM')}
         </Heading>
         <NetIncome expenseTotal={expenseTotal} incomeTotal={incomeTotal} />
-        <div>
+        <Box mt={3}>
             {map(budgetProgressItems, ({category, amountSpent, amountPlanned}) => (
                 <ProgressSummary
                     key={category}
@@ -40,6 +40,6 @@ export const MonthlySummary = ({
                     link={`/expenses?category=${category}`}
                     actual={amountSpent} />
             ))}
-        </div>
+        </Box>
     </div>
 )

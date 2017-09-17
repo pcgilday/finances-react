@@ -1,30 +1,26 @@
 // @flow
 import React from 'react'
 import styled from 'styled-components'
-import {Progress} from 'rebass'
 import {Link} from 'react-router-dom'
 import {formatCurrency} from '../formatting'
 import {
     Flex,
     Text,
-    spacing,
-    colors,
-} from './base'
+    Border,
+    Progress,
+} from 'rebass'
+import theme from './theme'
 
-
-const StyledProgressSummary = styled.div`
-    border: 0.5px solid ${colors.lightGray};
-    padding: ${spacing[0]} ${spacing[0]};
-    margin-bottom: ${spacing[0]};
-    color: ${colors.black};
-    &:hover {
-        background-color: ${colors.lightGray};
-    }
-`
 
 const StyledLink = styled(Link)`
     text-decoration: none;
+`
 
+const StyledProgressSummary = styled(Border)`
+    color: ${theme.colors.black};
+    &:hover {
+        background-color: ${theme.colors.lightGray};
+    }
 `
 
 export const ProgressSummary = (
@@ -32,28 +28,28 @@ export const ProgressSummary = (
     {name: string, planned: number, actual: number, link: string},
 ) => (
     <StyledLink to={link} >
-        <StyledProgressSummary >
-            <Flex justifyContent='space-between' spacing={`0 0 ${spacing[0]} 0`}>
-                <Text size={3} bold >
+        <StyledProgressSummary p={2} mb={2} borderWidth={2} color='lightGray' >
+            <Flex justify='space-between' pb={2} align='baseline' >
+                <Text fontSize={[2, 3]} bold >
                     {name}
                 </Text>
 
-                <div>
-                    <Text size={2} bold >
+                <Flex>
+                    <Text fontSize={[1, 2]} bold >
                         {formatCurrency(actual)}
                     </Text>
-                    <Text size={1} >
-                        {' of '}
+                    <Text fontSize={1} px={1} >
+                        {'of'}
                     </Text>
-                    <Text size={2} bold >
+                    <Text fontSize={[1, 2]} bold >
                         {formatCurrency(planned)}
                     </Text>
-                </div>
+                </Flex>
             </Flex>
             <Progress
-                height={'25px'}
+                style={{height: '15px'}}
                 value={actual / planned}
-                color={actual < planned ? colors.green : colors.red} />
+                color={actual > planned ? 'red' : 'green'} />
         </StyledProgressSummary>
     </StyledLink>
 )

@@ -3,7 +3,6 @@ import {
     map,
 } from 'lodash'
 import React from 'react'
-import styled from 'styled-components'
 import moment from 'moment'
 import type {Transaction} from '../flowtypes'
 import {formatCurrency} from '../formatting'
@@ -21,12 +20,8 @@ type Props  = {|
     transactions: Array<Transaction>,
 |}
 
-const StyledTable = styled(Table)`
-    max-width: 1000px;
-`
-
 export const TransactionsTable = ({transactions}: Props) => (
-    <StyledTable >
+    <Table>
         <TableHeader>
             <TableRow>
                 <TableHeaderCell>
@@ -36,34 +31,31 @@ export const TransactionsTable = ({transactions}: Props) => (
                     {'Name'}
                 </TableHeaderCell>
                 <TableHeaderCell>
-                    {'Category'}
+                    {'Amount'}
                 </TableHeaderCell>
                 <TableHeaderCell>
-                    {'Notes'}
+                    {'Category'}
                 </TableHeaderCell>
             </TableRow>
         </TableHeader>
         <TableBody>
             {map(transactions, ({amount, date, name, category, notes, id}) => (
                 <TableRow key={id} >
-                    <TableCell>
+                    <TableCell py={2}>
                         {moment(date).format('MMM D')}
                     </TableCell>
-                    <TableCell>
+                    <TableCell py={2} >
                         {name}
                     </TableCell>
-                    <TableCell >
+                    <TableCell py={2}>
                         {formatCurrency(amount)}
                     </TableCell>
-                    <TableCell>
+                    <TableCell py={2}>
                         {category}
-                    </TableCell>
-                    <TableCell>
-                        {notes}
                     </TableCell>
                 </TableRow>
             ))}
         </TableBody>
-    </StyledTable>
+    </Table>
 )
 
