@@ -1,14 +1,10 @@
 // @flow
 import React, {Component} from 'react'
-import type {Transaction, BudgetItem} from './flowtypes'
-import {fetchSheetData} from './sheets'
-
+import type {Transaction, BudgetItem} from '../flowtypes'
+import {fetchSheetFinances} from '../fetch-sheet-finances'
 
 type State = {|
-    expenses: Array<Transaction>,
-    income: Array<Transaction>,
-    accounts: Array<string>,
-    categories: Array<string>,
+    transactions: Array<Transaction>,
     budgets: Array<BudgetItem>,
 |}
 
@@ -18,10 +14,7 @@ export const connectFinances = () => (WrappedComponent) =>
         constructor() {
             super()
             this.state = {
-                expenses: [],
-                accounts: [],
-                categories: [],
-                income: [],
+                transactions: [],
                 budgets: [],
             }
         }
@@ -29,15 +22,16 @@ export const connectFinances = () => (WrappedComponent) =>
         state: State
 
         componentDidMount() {
-            return fetchSheetData(window.gapi.client)
+            return fetchSheetFinances(window.gapi.client)
                 .then((data) => {
                     return this.setState(data)
                 })
         }
         render() {
-            return (<WrappedComponent
-                {...this.props}
-                {...this.state}
-            />)
+            return (
+                <WrappedComponent
+                    {...this.props}
+                    {...this.state} />
+            )
         }
     }

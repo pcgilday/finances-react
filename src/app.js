@@ -1,29 +1,28 @@
+// @flow
 import React from 'react'
-import {Route} from 'react-router-dom'
+import {Route, Redirect} from 'react-router-dom'
 import {Provider as ThemeProvider, Box} from 'rebass'
 
 import {
-    DashboardContainer,
-    ExpensesContainer,
-    IncomeContainer,
-} from './containers'
+    Dashboard,
+    TransactionsByMonth,
+} from './components'
 import theme from './components/theme'
 import {Navigation} from './components/navigation'
 
 
 const navItems = [
     {label: 'Dashboard', url: '/dashboard'},
-    {label: 'Expenses', url: '/expenses'},
-    {label: 'Income', url: '/income'},
+    {label: 'Transactions', url: '/transactions'},
 ]
 
-export const App = ({expenses}) => (
+export const App = () => (
     <ThemeProvider theme={theme}>
         <Navigation items={navItems}/>
-        <Box mx={1}>
-            <Route path='/dashboard' component={DashboardContainer} />
-            <Route path='/expenses' component={ExpensesContainer} />
-            <Route path='/income' component={IncomeContainer} />
+        <Box mx={1} >
+            <Redirect from='/' to='/dashboard' exact />
+            <Route path='/dashboard' component={Dashboard} />
+            <Route path='/transactions' component={TransactionsByMonth} />
         </Box>
     </ThemeProvider>
 )

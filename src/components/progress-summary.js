@@ -24,8 +24,17 @@ const StyledProgressSummary = styled(Border)`
 `
 
 export const ProgressSummary = (
-    {name, planned, actual, link}:
-    {name: string, planned: number, actual: number, link: string},
+    {
+        name,
+        planned,
+        actual,
+        link,
+    }: {
+        name: string,
+        planned: number,
+        actual: number,
+        link: string,
+    },
 ) => (
     <StyledLink to={link} >
         <StyledProgressSummary p={2} mb={2} borderWidth={2} color='lightGray' >

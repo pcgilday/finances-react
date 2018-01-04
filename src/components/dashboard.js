@@ -1,31 +1,75 @@
 // @flow
 import {
     map,
-    sumBy,
 } from 'lodash'
 import React from 'react'
-import {Box} from 'rebass'
+import moment from 'moment'
+import {
+    Box,
+    Flex,
+    Heading,
+    Text,
+} from 'rebass'
 import {getBudgetProgress} from '../transforms'
-import type {MonthlyFinances} from '../flowtypes'
-import {MonthlySummary} from './monthly-summary'
+import type {MonthlyFinances, BudgetProgressItem} from '../flowtypes'
+import {formatCurrency} from '../formatting'
+import {connectMonthlyFinances} from '../data'
+import {ProgressSummary} from './progress-summary'
 
-type DashboardProps = {|
+
+const MonthlySummaryView = ({
+    month,
+    netIncome,
+    budgetProgressItems,
+}: {
+    month: number,
+    budgetProgressItems: Array<BudgetProgressItem>,
+    netIncome: number,
+}) => (
+    <div>
+        <Heading py={3} >
+            {moment().month(month).format('MMMM')}
+        </Heading>
+        <Flex>
+            <Text pr={2} bold >
+                {'Net Income: '}
+            </Text>
+            <Text>
+                {formatCurrency(netIncome)}
+            </Text>
+        </Flex>
+        <Box mt={3}>
+            {map(budgetProgressItems, ({category, amountSpent, amountPlanned}) => (
+                <ProgressSummary
+                    key={category}
+                    name={category}
+                    planned={amountPlanned}
+                    link={`/transactions?category=${category}`}
+                    actual={amountSpent} />
+            ))}
+        </Box>
+    </div>
+)
+
+
+const DashboardView = ({
+    monthlyFinances,
+}: {
     monthlyFinances: Array<MonthlyFinances>,
-|}
-
-export const Dashboard = ({monthlyFinances}: DashboardProps) => (
+}) => (
     <Box px={[0, 1, 2, 3]}>
-        {map(monthlyFinances, ({month, expenses, income, budget}) => (
-            <Box pb={3}>
-                <MonthlySummary
+        {map(monthlyFinances, ({month, transactions, budget, netIncome}) => (
+            <Box pb={3} key={month}>
+                <MonthlySummaryView
                     key={month}
                     month={month}
-                    expenseTotal={sumBy(expenses, 'amount')}
-                    incomeTotal={sumBy(income, 'amount')}
-                    budgetProgressItems={getBudgetProgress(expenses, budget)}
+                    netIncome={netIncome}
+                    budgetProgressItems={getBudgetProgress(transactions, budget)}
                 />
             </Box>
         ))}
     </Box>
 )
+
+export const Dashboard = connectMonthlyFinances()(DashboardView)
 

@@ -6,6 +6,7 @@ import {
     orderBy,
     map,
     uniq,
+    sumBy,
     toInteger,
 } from 'lodash'
 import {withProps, compose} from 'recompose'
@@ -14,29 +15,27 @@ import moment from 'moment'
 import type {
     Transaction,
     BudgetItem,
-    Month,
     MonthlyFinances,
-} from './flowtypes'
-import {filterTransactions} from './transforms'
+} from '../flowtypes'
+import {filterTransactions} from '../transforms'
 import {connectFinances} from './connect-finances'
 
 
-
-export const _getMonthlyFinances = (
-    {income, expenses, budget}:
-    {income: Array<Transaction>, expenses: Array<Transaction>, budget: {[Month]: BudgetItem},
+export const _getMonthlyFinances = ({
+    budget,
+    transactions,
+}: {
+    transactions: Array<Transaction>,
+    budget: Array<BudgetItem>,
 }): Array<MonthlyFinances> => {
-    const monthlyExpenses = groupBy(expenses, (expense: Transaction) => {
-        return moment(get(expense, 'date')).month()
+    const monthlyTransactions = groupBy(transactions, (transaction: Transaction) => {
+        return moment(get(transaction, 'date')).month()
     })
-    const monthlyIncome = groupBy(income, (income: Transaction) => {
-        return moment(get(income, 'date')).month()
-    })
-    const months = uniq([...keys(monthlyExpenses), ...keys(monthlyIncome)])
+    const months = uniq(keys(monthlyTransactions))
     return map(months, (month) => ({
         month: toInteger(month),
-        expenses: get(monthlyExpenses, month),
-        income: get(monthlyIncome, month),
+        transactions: get(monthlyTransactions, month),
+        netIncome: sumBy(get(monthlyTransactions, month), 'amount'),
         budget: get(budget, month),
     }))
 }
