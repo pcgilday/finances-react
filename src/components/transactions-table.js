@@ -16,11 +16,11 @@ import {
 } from './base'
 
 
-type Props  = {|
+export const TransactionsTable = ({
+    transactions,
+}: {
     transactions: Array<Transaction>,
-|}
-
-export const TransactionsTable = ({transactions}: Props) => (
+}) => (
     <Table>
         <TableHeader>
             <TableRow>

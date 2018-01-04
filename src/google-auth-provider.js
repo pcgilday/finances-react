@@ -51,7 +51,7 @@ export class GoogleAuthProvider extends Component {
         this.loadAuthClient()
     }
 
-    handleSignIn() {
+    handleLogin() {
         const {gapi} = this.state
         gapi.auth2.getAuthInstance().signIn();
     }
@@ -59,7 +59,7 @@ export class GoogleAuthProvider extends Component {
     render() {
         const loginProps = {
             isLoggedIn: this.state.isLoggedIn,
-            onSignIn: bindKey(this, 'handleSignIn'),
+            onLogin: bindKey(this, 'handleLogin'),
         }
         return (this.props.children(loginProps))
     }

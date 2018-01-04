@@ -6,8 +6,11 @@ import {
     isEmpty,
     filter,
     map,
+    mapValues,
     uniq,
 } from 'lodash'
+
+import numeral from 'numeral'
 
 import type {
     Transaction,
@@ -21,11 +24,11 @@ export const filterTransactions = (
     monthlyFinances: Array<MonthlyFinances>,
     filterParams: {[string]: string},
 ): Array<MonthlyFinances> => map(monthlyFinances, ({
-    income, expenses, ...props
+    transactions,
+    ...props
 }) => ({
     ...props,
-    income: isEmpty(filterParams) ? income : filter(income, filterParams),
-    expenses: isEmpty(filterParams) ? expenses : filter(expenses, filterParams),
+    transactions: isEmpty(filterParams) ? transactions : filter(transactions, filterParams),
 }))
 
 
@@ -38,24 +41,23 @@ export const getCategoryTotals = (
     forEach(items, ({amount, category}) =>
         totals[category] += amount
     )
-    return totals
+    return mapValues(totals, (value) => numeral(value.toFixed(2)).value())
 }
 
 
 export const getBudgetProgress = (
-    expenses: Array<Transaction>,
+    transactions: Array<Transaction>,
     budget: Array<BudgetItem>,
 ): Array<BudgetProgressItem> => {
 
     const budgetCategories = getCategoryTotals(budget)
-    const expensesCategories = getCategoryTotals(expenses)
-
-    const categories  = uniq([...keys(budgetCategories), ...keys(expensesCategories)])
+    const transactionCategories = getCategoryTotals(transactions)
+    const categories  = uniq([...keys(budgetCategories), ...keys(transactionCategories)])
 
     return map(categories, (category) => ({
         category,
-        amountPlanned: get(budgetCategories, category),
-        amountSpent: get(expensesCategories, category),
+        amountPlanned: Math.abs(get(budgetCategories, category, 0)),
+        amountSpent: Math.abs(get(transactionCategories, category, 0)),
     }))
 }
 

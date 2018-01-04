@@ -1,4 +1,4 @@
-import {_parseTransaction, _parseBudget} from './sheets'
+import {_parseTransaction, _parseBudget} from './fetch-sheet-finances'
 
 
 test('[_parseTransaction] constructs object from sheet array', () => {
@@ -7,14 +7,12 @@ test('[_parseTransaction] constructs object from sheet array', () => {
         'Amazon',
         '$21.44',
         'Supplies',
-        'Checking',
         'kitchen and bathroom refills',
     ])
     expect(expense.date).toBe('2017-08-09')
     expect(expense.name).toBe('Amazon')
     expect(expense.amount).toBe(21.44)
     expect(expense.category).toBe('Supplies')
-    expect(expense.account).toBe('Checking')
     expect(expense.notes).toBe('kitchen and bathroom refills')
 })
 

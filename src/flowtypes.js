@@ -16,7 +16,7 @@ export type BudgetItem = {|
     name: string,
     amount: number,
     category: string,
-    notes: string,
+    notes?: string,
 |}
 
 export type BudgetProgressItem = {|
@@ -27,8 +27,7 @@ export type BudgetProgressItem = {|
 
 export type MonthlyFinances = {|
     month: Month,
-    expenses: Array<Transaction>,
-    income: Array<Transaction>,
+    transactions: Array<Transaction>,
+    netIncome: number,
     budget: Array<BudgetItem>,
-    progress: Array<BudgetProgressItem>,
 |}
