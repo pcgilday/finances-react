@@ -3,21 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "grid-styled": "^2.0.0-10",
+    "grid-styled": "^5.0.2",
     "lodash": "^4.17.4",
-    "material-ui": "^0.19.1",
+    "material-ui": "^0.20.2",
     "moment": "^2.18.1",
     "numeral": "^2.0.6",
-    "query-string": "^5.0.0",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
+    "query-string": "^6.2.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "1.0.11",
-    "rebass": "^1.0.4",
-    "recompose": "^0.25.0",
+    "react-scripts": "2.1.1",
+    "rebass": "^2.3.4",
+    "recompose": "^0.30.0",
     "render-if": "^0.1.1",
-    "styled-components": "^2.1.2"
+    "styled-components": "^4.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -28,7 +28,7 @@
     "flow": "flow"
   },
   "devDependencies": {
-    "firebase-tools": "^3.10.0",
-    "flow-bin": "^0.52.0"
+    "firebase-tools": "^6.1.0",
+    "flow-bin": "^0.86.0"
   }
 }
