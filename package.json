@@ -29,6 +29,6 @@
   },
   "devDependencies": {
     "firebase-tools": "^3.10.0",
-    "flow-bin": "^0.52.0"
+    "flow-bin": "^0.86.0"
   }
 }
